@@ -1,25 +1,41 @@
 import logo from './logo.svg';
-import './App.css';
+import './styles/App.css';
+import {Route, Switch, withRouter} from 'react-router-dom';
+import React, { Component } from 'react';
+import {Button, Navbar, Nav, NavLink, FormControl, Form} from "react-bootstrap";
+import {Dashboard} from "./components/Dashboard";
+import { Router } from "react-router-dom";
+// import useAuth0 from "@auth0/auth0-react/dist/use-auth0";
+import NavBar from "./components/NavBar";
+import { useAuth0 } from "@auth0/auth0-react";
+import Container from "react-bootstrap/Container";
+import History from "./utils/History";
+import Profile from "./components/Profile";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const { isLoading, error } = useAuth0();
+
+    if (error) {
+        return <div>Oops... {error.message}</div>;
+    }
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    return (
+        <Router history={History}>
+            <div id="app" className="container-fluid">
+                <NavBar />
+                <Switch>
+                    <Route exact path="/" />
+                    <Route exact path="/dashboard"><Dashboard /></Route>
+                    <Route exact path="/profile"><Profile/></Route>
+                </Switch>
+                {/*<Footer />*/}
+            </div>
+        </Router>
+    );
+};
 
 export default App;

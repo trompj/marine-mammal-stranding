@@ -1,0 +1,31 @@
+.dropdown-location {
+    left: 29.5% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+}
+
+.dropdown-item:focus {
+    background-color: #17a2b8 !important;
+}
+
+.dropdown-item-active {
+    background-color: #17a2b8 !important;
+}
+
+.disabled-nav-item {
+    color: #212529;
+    cursor: default !important;
+}
+
+.disabled-nav-item:hover {
+    background-color: white !important;
+}
+
+.nav-link.active {
+    color: #17a2b8 !important;
+    font-weight: bold;
+}
+
+.dropdown-item.active {
+    background-color: #17a2b8 !important;
+}
