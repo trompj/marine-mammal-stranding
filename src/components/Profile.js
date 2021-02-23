@@ -1,17 +1,17 @@
 import React, {useEffect} from "react";
 import { Container, Row, Col } from "reactstrap";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import {Domain} from "../ApplicationData";
 
 export const ProfileComponent = () => {
     const { user, getAccessTokenSilently, getAccessTokenWithPopup } = useAuth0();
 
     useEffect(() => {
         const getUserMetadata = async () => {
-            const domain = "dev-97ard54a.us.auth0.com";
 
             try {
                 let accessToken = await getAccessTokenWithPopup({
-                    audience: `https://${domain}/api/v2/`,
+                    audience: `https://${Domain}/api/v2/`,
                     scope: "read:current_user",
                 });
 

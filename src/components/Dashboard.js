@@ -13,8 +13,9 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import {Col, Container, Row} from "reactstrap";
 import MapMarker from "./MapMarker";
 import DashboardMap from "./DashboardMap";
+import {ApiURI, Domain, MapboxToken} from "../ApplicationData";
 
-const TOKEN="pk.eyJ1IjoianQyMjUiLCJhIjoiY2tsNHJ6ZmduMXd1cTJwcGx4MDN2eHlwYyJ9.sJrdVXyR9hTFkEKYDjysjA";
+const TOKEN = MapboxToken;
 
 const geolocateStyle = {
     position: 'relative',
@@ -68,14 +69,12 @@ export const Dashboard = () => {
 
     useEffect(() => {
         const getUserMetadata = async () => {
-            const domain = "dev-97ard54a.us.auth0.com";
-
             try {
                 const accessToken = await getAccessTokenSilently({
-                    audience: `https://${domain}/api/v2/`,
+                    audience: `https://${Domain}/api/v2/`,
                     scope: "read:current_user",
                 });
-                const userDetailsByIdUrl = `http://127.0.0.1:8080/strandings`;
+                const userDetailsByIdUrl = `${ApiURI}/strandings`;
 
                 const metadataResponse = await fetch(userDetailsByIdUrl, {
                     headers: {
